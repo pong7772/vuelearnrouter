@@ -1,22 +1,46 @@
-<script setup>
-import { RouterLink, RouterView } from "vue-router";
+<script >
+export default {
+  methods: {
+    handleBack() {
+      this.$router.go(-1);
+    },
+    handleForword() {
+      this.$router.go(1);
+    },
+    handleRedirect() {
+      this.$router.push({ name: "home" });
+    },
+  },
+};
 </script>
 
 <template>
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink :to="{ name: 'job' }">Jobs</RouterLink>
+        <router-link to="/about">About</router-link>
+        <router-link to="/">Home</router-link>
+        <router-link :to="{ name: 'job' }">Jobs</router-link>
       </nav>
     </div>
   </header>
 
-  <RouterView />
+  <button class="btns" @click="handleRedirect">Redirect</button>
+  <button class="btns" @click="handleForword">Forword</button>
+  <button class="btns" @click="handleBack">Back</button>
+
+  <router-view />
 </template>
 
 <style scoped>
+.btns {
+  cursor: pointer;
+  width: 100px;
+  padding: 10px;
+  border: none;
+  margin: 20px 10px;
+  border-radius: 10px;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;

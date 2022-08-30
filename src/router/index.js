@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import JobView from '../views/job/JobView.vue'
+import NotFound from '../views/NotFound.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -22,7 +23,22 @@ const router = createRouter({
       name: 'job',
       component: JobView
     },
-
+    {
+      path: '/job/:id',
+      name: 'jobDetail',
+      component: () => import("../views/job/JobDetailView.vue"),
+      props: true
+    },
+    {
+      path: '/all-job',
+      redirect: '/job',
+    },
+    //page not found
+    {
+      path: '/:catchAll(.*)',
+      name: 'notFound',
+      component: NotFound
+    }
   ]
 })
 
